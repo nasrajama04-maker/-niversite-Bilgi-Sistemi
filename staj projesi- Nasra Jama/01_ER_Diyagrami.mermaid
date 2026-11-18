@@ -1,0 +1,57 @@
+erDiagram
+    BOLUM ||--o{ OGRENCI : "kayıtlıdır"
+    BOLUM ||--o{ OGRETIM_UYESI : "görev yapar"
+    OGRETIM_UYESI ||--o{ DERS : "verir"
+    OGRENCI ||--o{ KAYIT : "kayıt olur"
+    DERS ||--o{ KAYIT : "içerir"
+
+    BOLUM {
+        int bolum_id PK
+        varchar ad
+        varchar fakulte
+        int kontenjan
+    }
+
+    OGRETIM_UYESI {
+        int id PK
+        varchar ad
+        varchar soyad
+        varchar unvan
+        int bolum_id FK
+        varchar e_posta UK
+        date ise_giris
+    }
+
+    OGRENCI {
+        int ogrenci_no PK
+        varchar ad
+        varchar soyad
+        char tc_kimlik UK
+        date dogum_tarihi
+        char cinsiyet
+        int bolum_id FK
+        int giris_yili
+        varchar e_posta UK
+        bit aktif_mi
+    }
+
+    DERS {
+        varchar ders_kodu PK
+        varchar ad
+        int kredi
+        int ogretim_uyesi_id FK
+        varchar donem
+        varchar ders_turu
+        int max_ogrenci
+    }
+
+    KAYIT {
+        int kayit_id PK
+        int ogrenci_no FK
+        varchar ders_kodu FK
+        varchar akademik_yil
+        varchar donem
+        decimal not_degeri
+        varchar harf_notu
+        datetime kayit_tarihi
+    }
